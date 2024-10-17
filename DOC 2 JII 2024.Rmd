@@ -1,0 +1,46 @@
+---
+title: "DOC 2 JII 2024"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::readthedown:
+    highlight: kate
+  rmdformats::material: default
+---
+
+```{r setup, include=FALSE}
+## Global options
+knitr::opts_chunk$set(cache = TRUE)
+library(highcharter)
+```
+
+## Función seno y coseno
+
+La función coseno es una función periódica de periodo $T$ que se define como:
+
+$$ 
+f(t)= \cos(2\pi t) 
+$$ 
+El gráfico está dado por:
+
+```{r coseno, echo=FALSE, message=FALSE, warning=FALSE}
+x<- seq(1, 4*pi, length=200)
+y1<- cos(x)
+y2<- sin(x)
+hc <- highchart() |> hc_add_series(cbind(x,y1)) |> hc_add_series(cbind(x,y2)) |> hc_title(text="Funciones seno y coseno")
+hc
+```
+
+#Gráficos interactivos
+
+Ahora mostraremos un gráfico interactivo de una muestra de una distribución Gaussiana que se define como:
+
+$$
+f(x) = \frac{\mbox{e}^{\frac{(x-\mu)^2}{2\sigma^2}}}{\sqrt{2\pi\sigma}}
+$$
+
+```{r gauss, message=FALSE, warning=FALSE}
+library(highcharter)
+gauss <- rnorm(200,mean = 2,sd = 2)
+hc <- highchart() |> hc_add_series(cbind(1:200,gauss))
+hc
+```
